@@ -1,0 +1,114 @@
+
+body {
+    margin: 0;
+    font-family: arial;
+    display: flex;
+    flex-direction: column;
+    padding-top: 135px;
+    padding-bottom: 50px;
+    background-color: #e5e7eb;
+    
+}
+      
+
+p {
+  margin: 0;
+}
+
+
+/* Attendence filter */
+.attendence-filter-container {
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+    margin: 12px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.student-staff-buttons-div {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    background-color: #e2e8ef;
+    padding: 4px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+.student-staff-buttons-div button {
+    background-color: #2f5e8c;
+    color: aliceblue ;
+    border: none;
+    padding: 5px;
+    border-radius: 9px;
+    font-size: 10px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+    flex: 1;
+}
+
+.attendence-filter-container p {
+    color: gray;
+    font-size: 10px;
+    margin-top:6px;
+    margin-bottom: 4px;
+
+}
+
+.date-title {
+    display: flex;
+    align-items: center;
+    
+}
+.date-title svg {
+    height: 10px;
+    color: gray;
+}
+
+.date-input {
+    background-color: #f4f7fa;
+    border: 1px solid rgb(233, 233, 233);
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-family: Plus Jakarta Sans,system-ui,sans-serif;
+}
+
+.class-subject-filter-div {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-family: Plus Jakarta Sans,system-ui,sans-serif;
+    
+}
+
+.class-subject-filter {
+    flex: 1;
+}
+  
+.class-dropdown,
+.subject-dropdown {
+    width: 100%;
+    background-color: #f4f7fa;
+    border: 1px solid rgb(233, 233, 233);
+    border-radius: 10px;
+    padding: 10px 0px;
+    font-family: Plus Jakarta Sans,system-ui,sans-serif;
+    padding-left: 13px;
+}   
+
+    
+    
+
+
+.class-subject-input {
+    width: 100%;
+    background-color: #f4f7fa;
+    border: 1px solid rgb(233, 233, 233);
+    border-radius: 10px;
+    padding: 10px 0px;
+    font-family: Plus Jakarta Sans,system-ui,sans-serif;
+}

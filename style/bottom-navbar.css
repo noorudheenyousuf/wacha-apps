@@ -1,0 +1,41 @@
+.bottom-navbar-container {
+   display: flex; 
+   justify-content: space-between;
+   background-color: azure;
+   padding: 5px;
+   position: fixed;
+   bottom: 0;
+   left: 0;
+   right: 0;
+}
+
+.bottom-nav-button {
+    font-size: 9px;
+    border: none;
+    background-color: azure;
+    color: rgb(132, 131, 131);
+}
+
+.bottom-navbar-container {
+    padding-left: 14px;
+    padding-right: 14px;
+    
+
+}
+.bottom-navbar-container svg {
+    width: 15px;
+    height: 15px;
+    padding-top:5px;
+    padding-left: 5px;
+    padding-right: 5px;
+ 
+    
+}
+.bottom-nav-button.active {
+    color: #245b70;
+   
+}
+.bottom-nav-button:active {
+    color: #245b70;
+}
+
