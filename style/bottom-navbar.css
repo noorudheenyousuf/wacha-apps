@@ -10,7 +10,7 @@
 }
 
 .bottom-nav-button {
-    font-size: 9px;
+    font-size: px;
     border: none;
     background-color: azure;
     color: rgb(132, 131, 131);
@@ -23,8 +23,8 @@
 
 }
 .bottom-navbar-container svg {
-    width: 15px;
-    height: 15px;
+    width: 30px;
+    height: 30px;
     padding-top:5px;
     padding-left: 5px;
     padding-right: 5px;
