@@ -99,3 +99,33 @@
     padding: 10px 0px;
     font-family: Plus Jakarta Sans,system-ui,sans-serif;
 }
+
+.attendence-students-list {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    margin: 12px;
+    background-color: white;
+    border-radius: 10px;
+    
+    justify-content: center;
+    align-items: center;
+}
+.attendence-students-list-demo {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    margin: 12px;
+    border-radius: 10px;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;  
+}
+
+.choose-text {
+    font-weight: bold;
+}
+
+.pick-text {
+    color: gray;
+}
