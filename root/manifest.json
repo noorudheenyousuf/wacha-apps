@@ -2,7 +2,7 @@
     "name": "Hajar App",
     "short_name": "Hajar",
     "description": "Hajar Attendence Management App",
-    "start_url": ".",
+    "start_url": "../index.html",
     "background-color": "#245b70",
     "theme_color": "#245b70",
     "display": "standalone",
