@@ -1,10 +1,12 @@
+/* Report Button Container */
 .report-filter-container {
     display: flex;
     flex-direction: column;
-    padding: 16px;
+    padding: 25px;
+    padding-bottom: 30px;
     margin: 16px;
     background-color: white;
-    border-radius: 10px;
+    border-radius: 20px;
 }
 .report-student-teacher-class-buttons-div {
     display: flex;
@@ -12,7 +14,7 @@
     gap: 4px;
     background-color: #d3dbe3;
     padding: 8px;
-    border-radius: 12px;
+    border-radius: 20px;
     margin-bottom: 12px;
     margin: 16px;
 }
@@ -22,7 +24,7 @@
     color: aliceblue ;
     border: none;
     padding: 10px;
-    border-radius: 9px;
+    border-radius: 15px;
     font-size: 15px;
     font-weight: bold;
     display: flex;
@@ -40,10 +42,22 @@
 
 }
 
+.students-dropdown,
+.subject-dropdown {
+    width: 100%;
+    background-color: #f4f7fa;
+    border: 1px solid rgb(233, 233, 233);
+    border-radius: 10px;
+    padding: 15px 13px;
+    font-size: 17px;
+    font-family: Plus Jakarta Sans,system-ui,sans-serif;
+    
+} 
+
 .report-student-detail-container {
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 25px;
     margin: 16px;
     background-color: white;
     border-radius: 20px; 
@@ -123,6 +137,7 @@
 .missed-title,
 .report-container-ramaining-text {
     color: gray;
+    font-size: 14px;
 }
 
 .report-container-ramaining-text {

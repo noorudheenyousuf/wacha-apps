@@ -2,10 +2,10 @@
 .attendence-filter-container {
     display: flex;
     flex-direction: column;
-    padding: 16px;
+    padding: 25px;
     margin: 16px;
     background-color: white;
-    border-radius: 10px;
+    border-radius: 30px;
 }
 
 .student-staff-buttons-div {
@@ -14,7 +14,7 @@
     gap: 4px;
     background-color: #e2e8ef;
     padding: 8px;
-    border-radius: 12px;
+    border-radius: 20px;
     margin-bottom: 12px;
 }
 
@@ -23,7 +23,7 @@
     color: aliceblue ;
     border: none;
     padding: 10px;
-    border-radius: 9px;
+    border-radius: 15px;
     font-size: 15px;
     font-weight: bold;
     display: flex;
@@ -107,7 +107,7 @@
     padding-bottom: 65px;
     margin: 16px;
     background-color: white;
-    border-radius: 10px;
+    border-radius: 30px;
     
     justify-content: center;
     align-items: center;
