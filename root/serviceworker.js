@@ -15,20 +15,20 @@
 const CACHE_NAME = 'hajar-v1';
 
 const APP_SHELL = [
-    './',
-    './index.html',
+    '../',
+    '../index.html',
 
-    './style/general.css',
-    './style/top-navbar.css',
-    './style/bottom-navbar.css',
-    './style/attendance.css',
+    '../style/general.css',
+    '../style/top-navbar.css',
+    '../style/bottom-navbar.css',
+    '../style/attendance.css',
 
     './script.js',
 
-    './images/nooru.jpeg',
+    '../images/nooru.jpeg',
 
-    './icons/attendence-icon-64.png',
-    './icons/attendence-icon-512.png'
+    '../icons/attendence-icon-64.png',
+    '../icons/attendence-icon-512.png'
 ];
 
 
