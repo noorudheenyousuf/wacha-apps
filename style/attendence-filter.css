@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: column;
     padding: 16px;
-    margin: 12px;
+    margin: 16px;
     background-color: white;
     border-radius: 10px;
 }
@@ -104,8 +104,8 @@
     display: flex;
     flex-direction: column;
     padding: 20px;
-    padding-bottom: 40px;
-    margin: 12px;
+    padding-bottom: 65px;
+    margin: 16px;
     background-color: white;
     border-radius: 10px;
     
