@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="style/general.css">
     <link rel="stylesheet" href="style/attendence-filter.css">
    <link rel="stylesheet" href="style/report.css">
-   <link rel="stylesheet" href="style/settings-filter.css">
+   <link rel="stylesheet" href="style/settings.css">
     <link rel="stylesheet" href="style/add-students.css">
 </head>
 <body>
@@ -35,9 +35,9 @@
 
         <p class="hajar-title">Hajar </p>
         <div class="top-nav-buttons-container">
-            <button class="top-nav-buttons active">Attendence</button>
-            <button class="top-nav-buttons">Reports</button>
-            <button class="top-nav-buttons">Settings</button>
+            <button class="top-nav-buttons js-attendence-navbutton active">Attendence</button>
+            <button class="top-nav-buttons js-reports-navbutton">Reports</button>
+            <button class="top-nav-buttons js-settings-navbutton">Settings</button>
         </div>
     </header>
 
@@ -87,7 +87,7 @@
             </div>    
         </div>
 
-        <div class="attendence-students-list">
+        <div class="attendence-students-list js-student-list">
             <div class="attendence-students-list-demo">
                 <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check muted mx-auto mb-2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
                 <p class="choose-text">Choose a class & subject</p>
@@ -122,7 +122,8 @@
 
 
     
-    <script src="./scripts/script.js" ></script>
+    <script src="./scripts/top-navbar.js" ></script>
+    <script src="./scripts/bottom-navbar.js" ></script>
     <script src="./scripts.js"></script>
 </body>
 </html>
