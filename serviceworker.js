@@ -58,33 +58,33 @@
 //     );
 // });
 
-const CACHE_NAME = 'todo-app-v1';
-const urlsToCache = [
-    './index.html',
-    './style/general.css',
-    './style/top-navbar.css',
-    './style/bottom-navbar.css',
-    './style/attendence-filter.css',
-    './scripts.js',
-    './images/nooru.jpeg',
-    './icons/attendence-icon-64.png',
-    './icons/attendence-icon-512.png',
-    './manifest.json'
+// const CACHE_NAME = 'todo-app-v1';
+// const urlsToCache = [
+//     './index.html',
+//     './style/general.css',
+//     './style/top-navbar.css',
+//     './style/bottom-navbar.css',
+//     './style/attendence-filter.css',
+//     './scripts.js',
+//     './images/nooru.jpeg',
+//     './icons/attendence-icon-64.png',
+//     './icons/attendence-icon-512.png',
+//     './manifest.json'
 
-];
+// ];
 
-self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(urlsToCache);
-    })
-  );
-});
+// self.addEventListener('install', (event) => {
+//   event.waitUntil(
+//     caches.open(CACHE_NAME).then((cache) => {
+//       return cache.addAll(urlsToCache);
+//     })
+//   );
+// });
 
-self.addEventListener('fetch', (event) => {
-  event.respondWith(
-    caches.match(event.request).then((response) => {
-      return response || fetch(event.request);
-    })
-  );
-});
+// self.addEventListener('fetch', (event) => {
+//   event.respondWith(
+//     caches.match(event.request).then((response) => {
+//       return response || fetch(event.request);
+//     })
+//   );
+// });

@@ -121,14 +121,17 @@
     gap: 10px;
     justify-content: center;
     align-items: center;  
+    
 }
 
 
 .choose-text {
     font-weight: bold;
+    text-align: center;
 }
 
 .pick-text {
     color: gray;
     text-align: center;
+    
 }
