@@ -1,0 +1,115 @@
+.students-title-icon-addbutton-div {
+    display: flex;
+    justify-content: space-between;
+    padding: 25px;
+    padding-bottom: 30px;
+    margin: 16px;
+    background-color: rgba(255, 255, 255, 0.188);
+    border-radius: 20px;
+}
+
+.students-title-div {
+    
+}
+
+.icon-student-title-div {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.student-title {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.total-text {
+    
+}
+
+.students-title-icon-addbutton-div button {
+    background-color: #2f5e8c;
+    color: aliceblue ;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 15px;
+    font-size: 15px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+}
+
+.icon-student-title-div svg{
+    background-color: white;
+    padding: 12px;
+    border-radius: 10px;
+}
+
+.search-bar-icon-div {
+    display: flex;
+    justify-content: center;
+    gap: 9px;
+    position: relative;
+}
+
+.search-bar-icon-div input {
+    width:80%;
+    height: 60px;
+    border-radius: 15px;
+    border: none;
+    font-size: 18px;
+    padding-left: 45px;
+    
+    
+}
+
+.search-bar-icon-div svg {
+    position: absolute;
+    top: 20px;
+    left: 35px;
+    
+
+
+}
+
+.students-list-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px;
+    padding-bottom: 30px;
+    margin: 16px;
+    background-color: white;
+    border-radius: 20px;
+}
+
+.student-name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.edit-delete-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.edit-button {
+    background-color: aliceblue;
+    padding: 20px;
+    border-radius: 20px;
+    stroke: #2f5e8c;
+}
+
+.delete-button {
+    background-color: aliceblue;
+    padding: 20px;
+    border-radius: 20px;
+    stroke: red; 
+
+}
