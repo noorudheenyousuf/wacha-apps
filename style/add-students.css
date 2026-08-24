@@ -115,3 +115,94 @@
     stroke: red; 
 
 }
+
+
+
+/* Window DIV add Students */
+
+.add-student-window {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 25px;
+    padding-bottom: 30px;
+    margin: 16px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+}
+
+.addstudent-title-x-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.addstudent-title-x-div button {
+    border: none;
+    background-color: white;
+    color: gray;
+    font-size: 19px;
+}
+
+.add-student-window {
+    font-size: 12px;
+}
+
+.add-student-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.name-class-text {
+    font-size: 16px;
+    color: gray;
+    margin-top: 14px;
+    margin-bottom: 10px;
+}
+
+.name-input {
+    font-size: 19px;
+    padding: 19px 19px;
+    border-radius: 20px;
+    border: none;
+    background-color: aliceblue;
+}
+
+.class-dropdown-2 {
+    font-size: 19px;
+    padding: 19px 19px;
+    border-radius: 20px;
+    border: none;
+    background-color: aliceblue;
+    margin-bottom: 29px;
+}
+
+.addstudent-submit-button {
+    background-color: #2f5e8c;
+    color: aliceblue ;
+    border: none;
+    padding: 18px 14px;
+    border-radius: 15px;
+    font-size: 15px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+}
+
+.overlay-div {
+    background-color: rgba(0,0,0,0.5);
+    z-index: 200;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 70px;
+    
+    
+}

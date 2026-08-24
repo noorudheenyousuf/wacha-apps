@@ -1,34 +1,8 @@
-const students = [
-    {
-        name: 'Badhusha',
-        id: 1212,
-        rollNo: 1,
-        class: 'Plus One'
-    },
-    {
-        name: 'subair',
-        id: 122,
-        rollNo: 7,
-        class: 'Plus One'
-    },
-    {
-        name: 'shukoor',
-        id: 1252,
-        rollNo: 6,
-        class: 'Plus One'
-    },
-    {
-        name: 'ibrahim',
-        id: 16712,
-        rollNo: 4,
-        class: 'Plus One'
-    },
-];
+export function bottomNavbarButtonFunction() {
+    const studentsNavbutton = document.querySelector('.js-students-navbutton')
+    studentsNavbutton.addEventListener('click', () => {
 
-const studentsNavbutton = document.querySelector('.js-students-navbutton')
-studentsNavbutton.addEventListener('click', () => {
-
-    const studentsPageHTML = `
+     const studentsPageHTML = `
 
         <div class="students-title-icon-addbutton-div">
             <div class="icon-student-title-div">
@@ -39,7 +13,7 @@ studentsNavbutton.addEventListener('click', () => {
                 </div>
             </div>
             
-            <button>
+            <button class="js-add-student-button">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
                 Add
             </button>
@@ -322,6 +296,8 @@ subjectsNavbutton.addEventListener('click', () => {
     
         document.querySelector('main').innerHTML = subjectsPageHTML
 });
+
+}
 
 
 

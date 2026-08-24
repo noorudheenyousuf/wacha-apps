@@ -1,7 +1,8 @@
 .bottom-navbar-container {
    display: flex; 
    justify-content: space-between;
-   background-color: azure;
+   background-color: white;
+   border-top: solid 1px rgb(235, 232, 232);
    padding: 15px;
    position: fixed;
    bottom: 0;
@@ -12,7 +13,7 @@
 .bottom-nav-button {
     font-size: px;
     border: none;
-    background-color: azure;
+    background-color: white;
     color: rgb(132, 131, 131);
 }
 

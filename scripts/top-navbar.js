@@ -1,4 +1,5 @@
-const attendenceNavbutton = document.querySelector('.js-attendence-navbutton')
+export function topNavbarButtonFunction() {
+    const attendenceNavbutton = document.querySelector('.js-attendence-navbutton')
 attendenceNavbutton.addEventListener('click', () => {
 
     const attendencePageHTML = `
@@ -220,3 +221,5 @@ settingsNavbutton.addEventListener('click', () => {
 });
 
 
+
+}
