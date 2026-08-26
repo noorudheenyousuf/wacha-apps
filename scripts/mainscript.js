@@ -1,6 +1,5 @@
 
 import {topNavbarButtonFunction} from './top-navbar.js';
-import {renderOtherPages} from './bottom-navbar.js';
 import {renderAddstudentPage} from './add-students.js';
 import {renderAddTeacherPage} from './add-teachers.js';
 import {renderAddClassPage} from './add-classes.js';
@@ -16,7 +15,12 @@ renderAddTeacherPage();
 renderAddClassPage();
 renderAddSubjectPage();
 
-renderOtherPages();
+
+
+
+
+
+
 
 
 
