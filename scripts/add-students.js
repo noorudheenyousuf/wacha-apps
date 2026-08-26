@@ -59,8 +59,8 @@ export function renderStudentList() {
                     <p>${student.class}</p>
                 </div>
                 <div class="edit-delete-buttons">
-                    <svg class="edit-button" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil" aria-hidden="true" style="color: var(--secondary);"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path><path d="m15 5 4 4"></path></svg>
-                    <svg class="delete-button" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2 lucide-trash-2" aria-hidden="true" style="color: var(--red);"><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                    <svg data-id="${student.id}" class="edit-button js-edit-button" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil" aria-hidden="true" style="color: var(--secondary);"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"></path><path d="m15 5 4 4"></path></svg>
+                    <svg data-id="${student.id}" class="delete-button js-delete-button" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2 lucide-trash-2" aria-hidden="true" style="color: var(--red);"><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
                 </div>
             </div>
         `;
@@ -72,7 +72,7 @@ export function renderStudentList() {
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-plus" aria-hidden="true" style="color: var(--primary);"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><line x1="19" x2="19" y1="8" y2="14"></line><line x1="22" x2="16" y1="11" y2="11"></line></svg>
             <div class="students-title-div">
             <p class="student-title">Students</p>
-            <p class="total-text">2 total</p>
+            <p class="total-text">${students.length} total</p>
             </div>
             </div>
             <button class="js-add-student-button">
@@ -90,148 +90,194 @@ export function renderStudentList() {
         `;
     document.querySelector('main').innerHTML = pageHTML;
 
-    attachAddStudentListener();
-}
 
-function attachAddStudentListener() {
-    const addstudentButton = document.querySelector('.js-add-student-button');
-    addstudentButton.addEventListener('click', () => {
-        const addStudentWindowHTML = `
-        <div class="overlay-div">
-            <div class="add-student-window">
-            <div class="addstudent-title-x-div">
-                <p class="add-student-title">Add Student</p>
-                <button class="js-students-form-closebutton">X</button>
-            </div>
-            
-        <form class="js-student-form">
-            <div class="image-div">
-                <input type="file" id="photo-upload" accept="image/*" hidden>
-    
-    <!-- ക്ലിക്ക് ചെയ്യാവുന്ന കാർഡ് ഡിസൈൻ -->
-            <label for="photo-upload" class="upload-box">
-                <!-- Camera Plus SVG Icon -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#007a5e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
-                    <circle cx="12" cy="13" r="4"></circle>
-                    <line x1="19" y1="9" x2="19" y2="15"></line>
-                    <line x1="16" y1="12" x2="22" y2="12"></line>
-                </svg>
-                <span class="upload-text">PHOTO</span>
-            </label>
-            </div>
 
-            <p class="name-class-text">Name</p>
-            <input name="name" class="name-input" type="text" placeholder="Full Name">
-            <p class="name-class-text">Class</p>
-            <select name="class" class="class-dropdown-2">
-                        <option value="" selected>Select Class</option>
-                        <option value="plus-one" >Plus one</option>
-                        <option value="plus-two">Plus two</option>
-                        <option value="bs1" >Bs1</option>
-                        <option value="bs2">Bs2</option>
-                        </select>
-            <p class="rollno-text">Roll No.</p>
-            <input class="rollno-input" type="number" placeholder="Please enter a number">
-
-            <p class="id-text">Student Id</p>
-            <input name="id" class="id-input" type="number" placeholder="Enter student id">
-
-            <p class="address-text">Address</p>
-            <input name="address" class="address-input" type="text" name="" id="" placeholder="Residential Address">
-
-            
-            
-            <p class="place-text">Place</p>
-            <input name="place" class="place-input" type="text">
-
-            <p class="district-text">District</p>
-            <input name="district" class="district-input" type="text">
-
-            <p class="state-text">State</p>
-            <input name="state" class="state-input" type="text">
-
-            <p class="family-text">Family Details</p>
-
-            <p class="father-name">Father's Name</p>
-            <input name="fatherName" class="father-input" type="text">
-
-            <p class="mother-name">Mother's Name</p>
-            <input name="motherName" class="mother-input" type="text">
-            
-            <p class="contact-no">Father's Mobile</p>
-            <input name="fatherMobile" class="contact-no-input" type="number" placeholder="Enter WhatsApp No...">
-            
-            <p class="academic-text">Academic Status</p>
-            
-
-            <p class="admission-date-text">Admission Date</p>
-            <input name="admissonDate" class="father-input" type="text">
-
-            <p class="rank-text">Rank</p>
-            <input name="rank" class="rank-input" type="text">
-
-            <p class="previous-college-text">Previous College</p>
-            <input name="previousCollege" class="previous-college-input" type="text">
-
-            <button class="addstudent-submit-button js-submit-student-button">Add Student</button>
-            </form>
-            </div>
-            </div>
-        
-    `;
-        document.querySelector('main').insertAdjacentHTML('beforeend', addStudentWindowHTML);
-// taking form data
-        const studentForm = document.querySelector('.js-student-form');
-        studentForm.addEventListener('submit' , (e) => {
-            e.preventDefault();
-// Converting to object
-            const formData = new FormData(studentForm);
-            const newStudent = Object.fromEntries(formData.entries());
-// creating new ids for students
-            
-            if (students.length === 0) {
-                return 10000;
-            }
-            const maxId = Math.max(...students.map(student => student.id));
-            newStudent.id = maxId + 1;
-        
-
-            
-            students.push(newStudent);
-            // photo previewing
-            const photoInput = document.getElementById('photo-upload');
-const uploadBox = document.querySelector('.upload-box');
-
-photoInput.addEventListener('change', (e) => {
-    const file = e.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(event) {
-            // കാർഡിന്റെ പശ്ചാത്തലമായി തിരഞ്ഞെടുത്ത് ഇമേജ് മാറ്റുന്നു
-            uploadBox.style.backgroundImage = `url('${event.target.result}')`;
-            uploadBox.style.backgroundSize = 'cover';
-            uploadBox.style.backgroundPosition = 'center';
-            uploadBox.innerHTML = ''; // ഉള്ളിലെ ഐക്കണും ടെക്സ്റ്റും മാറ്റുന്നു
-        };
-        reader.readAsDataURL(file);
+    // 1. Add Student Button Listener
+    const addStudentBtn = document.querySelector('.js-add-student-button');
+    if (addStudentBtn) {
+        addStudentBtn.addEventListener('click', () => openStudentForm());
     }
-});
-            saveToStorage();
-            renderStudentList();
+
+
+    // 2. Edit Button Event Listener (HTML റെൻഡർ ചെയ്ത ശേഷം ഇവിടെ നൽകണം)
+    document.querySelectorAll('.js-edit-button').forEach((btn) => {
+        btn.addEventListener('click', () => {
+            const studentId = Number(btn.dataset.id);
+            const studentToEdit = students.find((s) => s.id === studentId);
+            if (studentToEdit) {
+                openStudentForm(studentToEdit);
+            }
         });
-
-
-
-        const closeButton = document.querySelector('.js-students-form-closebutton');
-        closeButton.addEventListener('click', () => {
-            const overlay = document.querySelector('.overlay-div');
-            overlay.remove();
-        })
     });
 
-    console.log(students)
-}   
+
+    // 3. Delete Button Event Listener
+    document.querySelectorAll('.js-delete-button').forEach((btn) => {
+        btn.addEventListener('click', () => {
+            const studentId = Number(btn.dataset.id);
+            const index = students.findIndex((s) => s.id === studentId);
+            if (index !== -1) {
+                students.splice(index, 1);
+                saveToStorage();
+                renderStudentList();
+            }
+        });
+    });
+}
+
+
+function openStudentForm(studentToEdit = null) {
+    const isEdit = Boolean(studentToEdit);
+    let uploadedPhotoBase64 = studentToEdit?.photo || '';
+
+    const addStudentWindowHTML = `
+        <div class="overlay-div">
+            <div class="add-student-window">
+                <div class="addstudent-title-x-div">
+                    <p class="add-student-title">${isEdit ? 'Edit Student' : 'Add Student'}</p>
+                    <button type="button" class="js-students-form-closebutton">X</button>
+                </div>
+                
+                <form class="js-student-form">
+                    <div class="image-div">
+                        <input type="file" id="photo-upload" accept="image/*" hidden>
+                        <label for="photo-upload" class="upload-box" style="${uploadedPhotoBase64 ? `background-image: url('${uploadedPhotoBase64}'); background-size: cover; background-position: center;` : ''}">
+                            ${uploadedPhotoBase64 ? '' : `
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#007a5e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                                    <circle cx="12" cy="13" r="4"></circle>
+                                    <line x1="19" y1="9" x2="19" y2="15"></line>
+                                    <line x1="16" y1="12" x2="22" y2="12"></line>
+                                </svg>
+                                <span class="upload-text">PHOTO</span>
+                            `}
+                        </label>
+                    </div>
+
+                    <p class="name-class-text">Name</p>
+                    <input name="name" class="name-input" type="text" placeholder="Full Name" value="${studentToEdit?.name || ''}" required>
+                    
+                    <p class="name-class-text">Class</p>
+                    <select name="class" class="class-dropdown-2" required>
+                        <option value="" disabled ${!studentToEdit ? 'selected' : ''}>Select Class</option>
+                        <option value="plus-one" ${studentToEdit?.class === 'plus-one' ? 'selected' : ''}>Plus one</option>
+                        <option value="plus-two" ${studentToEdit?.class === 'plus-two' ? 'selected' : ''}>Plus two</option>
+                        <option value="bs1" ${studentToEdit?.class === 'bs1' ? 'selected' : ''}>Bs1</option>
+                        <option value="bs2" ${studentToEdit?.class === 'bs2' ? 'selected' : ''}>Bs2</option>
+                    </select>
+
+                    <p class="rollno-text">Roll No.</p>
+                    <input name="rollNo" class="rollno-input" type="number" placeholder="Please enter a number" value="${studentToEdit?.rollNo || ''}">
+
+                    <p class="address-text">Address</p>
+                    <input name="address" class="address-input" type="text" placeholder="Residential Address" value="${studentToEdit?.address || ''}">
+
+                    <p class="place-text">Place</p>
+                    <input name="place" class="place-input" type="text" value="${studentToEdit?.place || ''}">
+
+                    <p class="district-text">District</p>
+                    <input name="district" class="district-input" type="text" value="${studentToEdit?.district || ''}">
+
+                    <p class="state-text">State</p>
+                    <input name="state" class="state-input" type="text" value="${studentToEdit?.state || ''}">
+
+                    <p class="family-text">Family Details</p>
+
+                    <p class="father-name">Father's Name</p>
+                    <input name="fatherName" class="father-input" type="text" value="${studentToEdit?.fatherName || ''}">
+
+                    <p class="mother-name">Mother's Name</p>
+                    <input name="motherName" class="mother-input" type="text" value="${studentToEdit?.motherName || ''}">
+                    
+                    <p class="contact-no">Father's Mobile</p>
+                    <input name="fatherMobile" class="contact-no-input" type="number" placeholder="Enter WhatsApp No..." value="${studentToEdit?.fatherMobile || ''}">
+                    
+                    <p class="academic-text">Academic Status</p>
+
+                    <p class="admission-date-text">Admission Date</p>
+                    <input name="admissonDate" class="father-input" type="text" value="${studentToEdit?.admissonDate || ''}">
+
+                    <p class="rank-text">Rank</p>
+                    <input name="rank" class="rank-input" type="text" value="${studentToEdit?.rank || ''}">
+
+                    <p class="previous-college-text">Previous College</p>
+                    <input name="previousCollege" class="previous-college-input" type="text" value="${studentToEdit?.previousCollege || ''}">
+
+                    <button type="submit" class="addstudent-submit-button js-submit-student-button">
+                        ${isEdit ? 'Update Student' : 'Add Student'}
+                    </button>
+                </form>
+            </div>
+        </div>
+    `;
+
+
+    document.querySelector('main').insertAdjacentHTML('beforeend', addStudentWindowHTML);
+
+    // Photo Preview Change Event
+    const photoInput = document.getElementById('photo-upload');
+    const uploadBox = document.querySelector('.upload-box');
+    
+    photoInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                uploadedPhotoBase64 = event.target.result;
+                uploadBox.style.backgroundImage = `url('${uploadedPhotoBase64}')`;
+                uploadBox.style.backgroundSize = 'cover';
+                uploadBox.style.backgroundPosition = 'center';
+                uploadBox.innerHTML = '';
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // Form Submit (Add Or Update)
+    const studentForm = document.querySelector('.js-student-form');
+    studentForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(studentForm);
+        const formValues = Object.fromEntries(formData.entries());
+
+        if (isEdit) {
+            // Edit ചെയ്യുമ്പോൾ പഴയ student update ചെയ്യുന്നു
+            const index = students.findIndex((s) => s.id === studentToEdit.id);
+            if (index !== -1) {
+                students[index] = {
+                    ...students[index],
+                    ...formValues,
+                    rollNo: formValues.rollNo ? Number(formValues.rollNo) : '',
+                    photo: uploadedPhotoBase64
+                };
+            }
+        } else {
+            // പുതിയ Student ആഡ് ചെയ്യുന്നു
+            const maxId = students.length > 0 ? Math.max(...students.map((s) => s.id)) : 10000;
+            const newStudent = {
+                ...formValues,
+                id: maxId + 1,
+                rollNo: formValues.rollNo ? Number(formValues.rollNo) : '',
+                photo: uploadedPhotoBase64
+            };
+            students.push(newStudent);
+        }
+
+        saveToStorage();
+        renderStudentList();
+    });
+
+    // Form Close Event
+    const closeButton = document.querySelector('.js-students-form-closebutton');
+    closeButton.addEventListener('click', () => {
+        const overlay = document.querySelector('.overlay-div');
+        if (overlay) overlay.remove();
+    });
+}
+
+
+
 
 
 
