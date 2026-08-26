@@ -103,17 +103,77 @@ function attachAddStudentListener() {
                 <p class="add-student-title">Add Student</p>
                 <button class="js-students-form-closebutton">X</button>
             </div>
+            
         <form class="js-student-form">
+            <div class="image-div">
+                <input type="file" id="photo-upload" accept="image/*" hidden>
+    
+    <!-- ക്ലിക്ക് ചെയ്യാവുന്ന കാർഡ് ഡിസൈൻ -->
+            <label for="photo-upload" class="upload-box">
+                <!-- Camera Plus SVG Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#007a5e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                    <circle cx="12" cy="13" r="4"></circle>
+                    <line x1="19" y1="9" x2="19" y2="15"></line>
+                    <line x1="16" y1="12" x2="22" y2="12"></line>
+                </svg>
+                <span class="upload-text">PHOTO</span>
+            </label>
+            </div>
+
             <p class="name-class-text">Name</p>
-            <input name="name" class="name-input" type="text" placeholder="Student name">
+            <input name="name" class="name-input" type="text" placeholder="Full Name">
             <p class="name-class-text">Class</p>
             <select name="class" class="class-dropdown-2">
-                        <option value="" selected>Select...</option>
+                        <option value="" selected>Select Class</option>
                         <option value="plus-one" >Plus one</option>
                         <option value="plus-two">Plus two</option>
                         <option value="bs1" >Bs1</option>
                         <option value="bs2">Bs2</option>
                         </select>
+            <p class="rollno-text">Roll No.</p>
+            <input class="rollno-input" type="number" placeholder="Please enter a number">
+
+            <p class="id-text">Student Id</p>
+            <input name="id" class="id-input" type="number" placeholder="Enter student id">
+
+            <p class="address-text">Address</p>
+            <input name="address" class="address-input" type="text" name="" id="" placeholder="Residential Address">
+
+            
+            
+            <p class="place-text">Place</p>
+            <input name="place" class="place-input" type="text">
+
+            <p class="district-text">District</p>
+            <input name="district" class="district-input" type="text">
+
+            <p class="state-text">State</p>
+            <input name="state" class="state-input" type="text">
+
+            <p class="family-text">Family Details</p>
+
+            <p class="father-name">Father's Name</p>
+            <input name="fatherName" class="father-input" type="text">
+
+            <p class="mother-name">Mother's Name</p>
+            <input name="motherName" class="mother-input" type="text">
+            
+            <p class="contact-no">Father's Mobile</p>
+            <input name="fatherMobile" class="contact-no-input" type="number" placeholder="Enter WhatsApp No...">
+            
+            <p class="academic-text">Academic Status</p>
+            
+
+            <p class="admission-date-text">Admission Date</p>
+            <input name="admissonDate" class="father-input" type="text">
+
+            <p class="rank-text">Rank</p>
+            <input name="rank" class="rank-input" type="text">
+
+            <p class="previous-college-text">Previous College</p>
+            <input name="previousCollege" class="previous-college-input" type="text">
+
             <button class="addstudent-submit-button js-submit-student-button">Add Student</button>
             </form>
             </div>
@@ -137,7 +197,26 @@ function attachAddStudentListener() {
             newStudent.id = maxId + 1;
         
 
+            
             students.push(newStudent);
+            // photo previewing
+            const photoInput = document.getElementById('photo-upload');
+const uploadBox = document.querySelector('.upload-box');
+
+photoInput.addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            // കാർഡിന്റെ പശ്ചാത്തലമായി തിരഞ്ഞെടുത്ത് ഇമേജ് മാറ്റുന്നു
+            uploadBox.style.backgroundImage = `url('${event.target.result}')`;
+            uploadBox.style.backgroundSize = 'cover';
+            uploadBox.style.backgroundPosition = 'center';
+            uploadBox.innerHTML = ''; // ഉള്ളിലെ ഐക്കണും ടെക്സ്റ്റും മാറ്റുന്നു
+        };
+        reader.readAsDataURL(file);
+    }
+});
             saveToStorage();
             renderStudentList();
         });
@@ -151,7 +230,7 @@ function attachAddStudentListener() {
         })
     });
 
-    
+    console.log(students)
 }   
 
 

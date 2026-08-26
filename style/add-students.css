@@ -10,9 +10,7 @@
 
 
 
-.students-title-div {
-    
-}
+
 
 .icon-student-title-div {
     display: flex;
@@ -120,16 +118,7 @@
 
 /* Window DIV add Students */
 
-.add-student-window {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 25px;
-    padding-bottom: 30px;
-    margin: 16px;
-    background-color: rgb(255, 255, 255);
-    border-radius: 20px;
-}
+
 
 .addstudent-title-x-div {
     display: flex;
@@ -147,6 +136,14 @@
 
 .add-student-window {
     font-size: 12px;
+    
+    position: absolute;
+    top: 10px;
+    
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
 }
 
 .add-student-title {
@@ -154,19 +151,87 @@
     font-weight: bold;
 }
 
-.name-class-text {
+.image-div {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.upload-box {
+    width: 120px;
+    height: 120px;
+    background-color: #ffffff;
+    border: 2px dashed #b0b7c3; /* ഡാഷ്‌ഡ് ബോർഡർ */
+    border-radius: 16px;       /* റൗണ്ടഡ് കോർണറുകൾ */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.upload-box:hover {
+    border-color: #007a5e;
+    background-color: #f0fdf4;
+}
+.upload-text {
+    color: #007a5e;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    font-family: sans-serif;
+}
+.name-class-text,
+.rollno-text,
+.id-text,
+.place-text,
+.district-text,
+.state-text,
+.father-name,
+.mother-name,
+.contact-no,
+.admission-date-text,
+.rank-text,
+.previous-college-text {
     font-size: 16px;
     color: gray;
     margin-top: 14px;
     margin-bottom: 10px;
 }
+.address-text,
+.family-text,
+.academic-text {
+    
+    font-size: 19px;
+    font-weight: bold;
+    margin-top: 70px;
+    margin-bottom: 15px;
+}
 
-.name-input {
+.name-input,
+.rollno-input,
+.id-input,
+.address-input,
+.place-input,
+.district-input,
+.state-input,
+.father-input,
+.mother-input,
+.contact-no-input,
+.addmission-date-input,
+.rank-input, 
+.previous-college-input{
     font-size: 19px;
     padding: 19px 19px;
     border-radius: 20px;
     border: none;
     background-color: aliceblue;
+    width: 100%;
+    box-sizing: border-box;
+    
 }
 
 .class-dropdown-2 {
@@ -175,7 +240,7 @@
     border-radius: 20px;
     border: none;
     background-color: aliceblue;
-    margin-bottom: 29px;
+    width: 100%;
 }
 
 .addstudent-submit-button {
@@ -190,6 +255,7 @@
     justify-content: center;
     align-items: center;
     gap: 3px;
+    margin-top: 30px;
 }
 
 .overlay-div {
@@ -198,11 +264,28 @@
     position: fixed;
     top: 0;
     bottom: 0;
+    left: 0;
+    right: 0;
+    
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 70px;
     
+    
+    overflow: auto;
+}
+
+.add-student-window {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 30px;
+    padding-bottom: 39px;
+   
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+
+   
     
 }
