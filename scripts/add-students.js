@@ -1,58 +1,39 @@
 const students = JSON.parse(localStorage.getItem('students')) || [
-    {
-        name: 'Badhusha',
-        id: 1212,
-        rollNo: 1,
-        class: 'Plus One'
-    },
-    {
-        name: 'subair',
-        id: 122,
-        rollNo: 7,
-        class: 'Plus One'
-    },
-    {
-        name: 'shukoor',
-        id: 1252,
-        rollNo: 6,
-        class: 'Plus One'
-    },
-    {
-        name: 'ibrahim',
-        id: 16712,
-        rollNo: 4,
-        class: 'Plus One'
-    },
-    {
-        name: 'Swalih',
-        id: 12345,
-        rollNo: 23,
-        class: 'Bs1'
-    }
+    { name: 'Badhusha', id: 1212, rollNo: 1, class: 'Plus One' },
+    { name: 'subair', id: 122, rollNo: 7, class: 'Plus One' },
+    { name: 'shukoor', id: 1252, rollNo: 6, class: 'Plus One' },
+    { name: 'ibrahim', id: 16712, rollNo: 4, class: 'Plus One' },
+    { name: 'Swalih', id: 12345, rollNo: 23, class: 'Bs1' }
 ];
 
 function saveToStorage() {
     localStorage.setItem('students', JSON.stringify(students));
 }
-// When add-student NAVBUTTON clicks...studentPage HTML generating
+
 export function renderAddstudentPage() {
     const studentsNavButton = document.querySelector('.js-students-navbutton');
-
     if (studentsNavButton) {
         studentsNavButton.addEventListener('click', () => {
             renderStudentList();
         });
     }
-
 }
 
-export function renderStudentList() {
+export function renderStudentList(searchQuery = '') {
+    const query = searchQuery.toLowerCase().trim();
+
+    // 1. ഫിൽട്ടറിംഗ്: പേര്, ക്ലാസ്, Roll No എന്നിവ അടിസ്ഥാനമാക്കി തിരയുന്നു
+    const filteredStudents = students.filter((student) => {
+        return (
+            student.name.toLowerCase().includes(query) ||
+            student.class.toLowerCase().includes(query) ||
+            String(student.rollNo || '').includes(query)
+        );
+    });
 
     let studentItemsHTML = '';
-    students.forEach((student) => {
+    filteredStudents.forEach((student) => {
         studentItemsHTML += `
-
-            <!-- Student List -->
             <div class="students-list-div">
                 <div>
                     <p class="student-name">${student.name}</p>
@@ -67,39 +48,46 @@ export function renderStudentList() {
     });
 
     const pageHTML = `
-            <div class="students-title-icon-addbutton-div">
+        <div class="students-title-icon-addbutton-div">
             <div class="icon-student-title-div">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-plus" aria-hidden="true" style="color: var(--primary);"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><line x1="19" x2="19" y1="8" y2="14"></line><line x1="22" x2="16" y1="11" y2="11"></line></svg>
-            <div class="students-title-div">
-            <p class="student-title">Students</p>
-            <p class="total-text">${students.length} total</p>
-            </div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-plus" aria-hidden="true" style="color: var(--primary);"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><line x1="19" x2="19" y1="8" y2="14"></line><line x1="22" x2="16" y1="11" y2="11"></line></svg>
+                <div class="students-title-div">
+                    <p class="student-title">Students</p>
+                    <p class="total-text">${filteredStudents.length} total</p>
+                </div>
             </div>
             <button class="js-add-student-button">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
-            Add
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
+                Add Student
             </button>
-            </div>
-            <div class="search-bar-icon-div">
+        </div>
+        <div class="search-bar-icon-div">
             <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search absolute left-3 top-1/2 -translate-y-1/2 muted" aria-hidden="true"><path d="m21 21-4.34-4.34"></path><circle cx="11" cy="11" r="8"></circle></svg>
-            <input type="text" placeholder="Search students...">
-            </div>
-            <div class="students-list-container">
+            <input type="text" class="js-search-input" value="${searchQuery}" placeholder="Search students...">
+        </div>
+        <div class="students-list-container">
             ${studentItemsHTML}
-            </div>
-        `;
+        </div>
+    `;
+
     document.querySelector('main').innerHTML = pageHTML;
 
+    // 2. Search Input Event Listener & Focus Handling
+    const searchInput = document.querySelector('.js-search-input');
+    if (searchInput) {
+        searchInput.focus();
+        searchInput.setSelectionRange(searchQuery.length, searchQuery.length);
 
-
-    // 1. Add Student Button Listener
-    const addStudentBtn = document.querySelector('.js-add-student-button');
-    if (addStudentBtn) {
-        addStudentBtn.addEventListener('click', () => openStudentForm());
+        searchInput.addEventListener('input', (e) => {
+            renderStudentList(e.target.value);
+        });
     }
 
+    // Add Student Button Listener
+    const addStudentBtn = document.querySelector('.js-add-student-button');
+    addStudentBtn.addEventListener('click', () => openStudentForm());
 
-    // 2. Edit Button Event Listener (HTML റെൻഡർ ചെയ്ത ശേഷം ഇവിടെ നൽകണം)
+    // Edit Button Listener
     document.querySelectorAll('.js-edit-button').forEach((btn) => {
         btn.addEventListener('click', () => {
             const studentId = Number(btn.dataset.id);
@@ -110,8 +98,7 @@ export function renderStudentList() {
         });
     });
 
-
-    // 3. Delete Button Event Listener
+    // Delete Button Listener
     document.querySelectorAll('.js-delete-button').forEach((btn) => {
         btn.addEventListener('click', () => {
             const studentId = Number(btn.dataset.id);
@@ -119,12 +106,11 @@ export function renderStudentList() {
             if (index !== -1) {
                 students.splice(index, 1);
                 saveToStorage();
-                renderStudentList();
+                renderStudentList(searchQuery);
             }
         });
     });
 }
-
 
 function openStudentForm(studentToEdit = null) {
     const isEdit = Boolean(studentToEdit);
@@ -160,48 +146,48 @@ function openStudentForm(studentToEdit = null) {
                     <p class="name-class-text">Class</p>
                     <select name="class" class="class-dropdown-2" required>
                         <option value="" disabled ${!studentToEdit ? 'selected' : ''}>Select Class</option>
-                        <option value="plus-one" ${studentToEdit?.class === 'plus-one' ? 'selected' : ''}>Plus one</option>
-                        <option value="plus-two" ${studentToEdit?.class === 'plus-two' ? 'selected' : ''}>Plus two</option>
-                        <option value="bs1" ${studentToEdit?.class === 'bs1' ? 'selected' : ''}>Bs1</option>
-                        <option value="bs2" ${studentToEdit?.class === 'bs2' ? 'selected' : ''}>Bs2</option>
+                        <option value="Plus One" ${studentToEdit?.class === 'Plus One' || studentToEdit?.class === 'plus-one' ? 'selected' : ''}>Plus One</option>
+                        <option value="Plus Two" ${studentToEdit?.class === 'Plus Two' || studentToEdit?.class === 'plus-two' ? 'selected' : ''}>Plus Two</option>
+                        <option value="Bs1" ${studentToEdit?.class === 'Bs1' || studentToEdit?.class === 'bs1' ? 'selected' : ''}>Bs1</option>
+                        <option value="Bs2" ${studentToEdit?.class === 'Bs2' || studentToEdit?.class === 'bs2' ? 'selected' : ''}>Bs2</option>
                     </select>
 
                     <p class="rollno-text">Roll No.</p>
-                    <input name="rollNo" class="rollno-input" type="number" placeholder="Please enter a number" value="${studentToEdit?.rollNo || ''}">
+                    <input name="rollNo" class="rollno-input" type="number" placeholder="e.g : 101" value="${studentToEdit?.rollNo || ''}">
 
                     <p class="address-text">Address</p>
-                    <input name="address" class="address-input" type="text" placeholder="Residential Address" value="${studentToEdit?.address || ''}">
+                    <input name="address" class="address-input" type="text" placeholder="House No., Street name, Area" value="${studentToEdit?.address || ''}">
 
                     <p class="place-text">Place</p>
-                    <input name="place" class="place-input" type="text" value="${studentToEdit?.place || ''}">
+                    <input name="place" class="place-input" type="text" placeholder="e.g : Kochi" value="${studentToEdit?.place || ''}">
 
                     <p class="district-text">District</p>
-                    <input name="district" class="district-input" type="text" value="${studentToEdit?.district || ''}">
+                    <input name="district" class="district-input" type="text" placeholder="e.g : Ernakulam" value="${studentToEdit?.district || ''}">
 
                     <p class="state-text">State</p>
-                    <input name="state" class="state-input" type="text" value="${studentToEdit?.state || ''}">
+                    <input name="state" class="state-input" type="text" placeholder="eg : Kerala" value="${studentToEdit?.state || ''}">
 
                     <p class="family-text">Family Details</p>
 
                     <p class="father-name">Father's Name</p>
-                    <input name="fatherName" class="father-input" type="text" value="${studentToEdit?.fatherName || ''}">
+                    <input name="fatherName" class="father-input" type="text" placeholder="e.g., Abdullah Al-Mansoor" value="${studentToEdit?.fatherName || ''}">
 
                     <p class="mother-name">Mother's Name</p>
-                    <input name="motherName" class="mother-input" type="text" value="${studentToEdit?.motherName || ''}">
+                    <input name="motherName" class="mother-input" type="text" placeholder="e.g., Amina Al-Zahra" value="${studentToEdit?.motherName || ''}">
                     
                     <p class="contact-no">Father's Mobile</p>
-                    <input name="fatherMobile" class="contact-no-input" type="number" placeholder="Enter WhatsApp No..." value="${studentToEdit?.fatherMobile || ''}">
+                    <input name="fatherMobile" class="contact-no-input" type="number" placeholder="enter whatsApp no." value="${studentToEdit?.fatherMobile || ''}">
                     
                     <p class="academic-text">Academic Status</p>
 
                     <p class="admission-date-text">Admission Date</p>
-                    <input name="admissonDate" class="father-input" type="text" value="${studentToEdit?.admissonDate || ''}">
+                    <input name="admissonDate" class="father-input" type="text" placeholder="DD / MM / YYYY" value="${studentToEdit?.admissonDate || ''}">
 
                     <p class="rank-text">Rank</p>
-                    <input name="rank" class="rank-input" type="text" value="${studentToEdit?.rank || ''}">
+                    <input name="rank" class="rank-input" type="text" placeholder="eg : Rank 1" value="${studentToEdit?.rank || ''}">
 
                     <p class="previous-college-text">Previous College</p>
-                    <input name="previousCollege" class="previous-college-input" type="text" value="${studentToEdit?.previousCollege || ''}">
+                    <input name="previousCollege" class="previous-college-input" type="text" placeholder="e.g : Al-Azhar Secondary School" value="${studentToEdit?.previousCollege || ''}">
 
                     <button type="submit" class="addstudent-submit-button js-submit-student-button">
                         ${isEdit ? 'Update Student' : 'Add Student'}
@@ -211,10 +197,8 @@ function openStudentForm(studentToEdit = null) {
         </div>
     `;
 
-
     document.querySelector('main').insertAdjacentHTML('beforeend', addStudentWindowHTML);
 
-    // Photo Preview Change Event
     const photoInput = document.getElementById('photo-upload');
     const uploadBox = document.querySelector('.upload-box');
     
@@ -233,7 +217,6 @@ function openStudentForm(studentToEdit = null) {
         }
     });
 
-    // Form Submit (Add Or Update)
     const studentForm = document.querySelector('.js-student-form');
     studentForm.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -242,7 +225,6 @@ function openStudentForm(studentToEdit = null) {
         const formValues = Object.fromEntries(formData.entries());
 
         if (isEdit) {
-            // Edit ചെയ്യുമ്പോൾ പഴയ student update ചെയ്യുന്നു
             const index = students.findIndex((s) => s.id === studentToEdit.id);
             if (index !== -1) {
                 students[index] = {
@@ -253,7 +235,6 @@ function openStudentForm(studentToEdit = null) {
                 };
             }
         } else {
-            // പുതിയ Student ആഡ് ചെയ്യുന്നു
             const maxId = students.length > 0 ? Math.max(...students.map((s) => s.id)) : 10000;
             const newStudent = {
                 ...formValues,
@@ -265,19 +246,14 @@ function openStudentForm(studentToEdit = null) {
         }
 
         saveToStorage();
+        const overlay = document.querySelector('.overlay-div');
+        if (overlay) overlay.remove();
         renderStudentList();
     });
 
-    // Form Close Event
     const closeButton = document.querySelector('.js-students-form-closebutton');
     closeButton.addEventListener('click', () => {
         const overlay = document.querySelector('.overlay-div');
         if (overlay) overlay.remove();
     });
 }
-
-
-
-
-
-

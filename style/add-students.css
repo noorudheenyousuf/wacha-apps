@@ -271,15 +271,22 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 20px 0;
     
     
-    overflow: auto;
+    
+    
 }
 
 .add-student-window {
+    font-size: 12px;
+    width: 80%;
+    max-width: 500px;
+    max-height: 85vh;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    
     padding: 30px;
     padding-bottom: 39px;
    
