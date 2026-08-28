@@ -175,3 +175,4 @@ function openTeacherForm(editTeacher = null) {
             renderTeacherList();
         }
     });
+}
