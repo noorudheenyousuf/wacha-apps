@@ -7,6 +7,7 @@ export function renderAddClassPage() {
     const classesNavbutton = document.querySelector('.js-classes-navbutton');
     if (classesNavbutton) {
         classesNavbutton.addEventListener('click', () => {
+            
             renderClassList();
         });
     }
