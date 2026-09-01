@@ -1,3 +1,5 @@
+
+
 const students = JSON.parse(localStorage.getItem('students')) || [
     { name: 'Badhusha', id: 1212, rollNo: 1, class: 'Plus One' },
     { name: 'subair', id: 122, rollNo: 7, class: 'Plus One' },
@@ -5,6 +7,8 @@ const students = JSON.parse(localStorage.getItem('students')) || [
     { name: 'ibrahim', id: 16712, rollNo: 4, class: 'Plus One' },
     { name: 'Swalih', id: 12345, rollNo: 23, class: 'Bs1' }
 ];
+
+console.log(students);
 
 function saveToStorage() {
     localStorage.setItem('students', JSON.stringify(students));
@@ -14,6 +18,7 @@ export function renderAddstudentPage() {
     const studentsNavButton = document.querySelector('.js-students-navbutton');
     if (studentsNavButton) {
         studentsNavButton.addEventListener('click', () => {
+            
             renderStudentList();
         });
     }
@@ -26,7 +31,7 @@ export function renderStudentList(searchQuery = '') {
     const filteredStudents = students.filter((student) => {
         return (
             student.name.toLowerCase().includes(query) ||
-            student.class.toLowerCase().includes(query) ||
+            (student.class || '' ).toLowerCase().includes(query) ||
             String(student.rollNo || '').includes(query)
         );
     });
@@ -75,7 +80,7 @@ export function renderStudentList(searchQuery = '') {
     // 2. Search Input Event Listener & Focus Handling
     const searchInput = document.querySelector('.js-search-input');
     if (searchInput) {
-        searchInput.focus();
+        
         searchInput.setSelectionRange(searchQuery.length, searchQuery.length);
 
         searchInput.addEventListener('input', (e) => {
@@ -151,9 +156,12 @@ function openStudentForm(studentToEdit = null) {
                         <option value="Bs1" ${studentToEdit?.class === 'Bs1' || studentToEdit?.class === 'bs1' ? 'selected' : ''}>Bs1</option>
                         <option value="Bs2" ${studentToEdit?.class === 'Bs2' || studentToEdit?.class === 'bs2' ? 'selected' : ''}>Bs2</option>
                     </select>
+                    
+                    <p class="rollno-text">Student ID</p>
+                    <input name="id" class="rollno-input" type="number" placeholder="e.g : 1212" value="${studentToEdit?.id || ''}">
 
                     <p class="rollno-text">Roll No.</p>
-                    <input name="rollNo" class="rollno-input" type="number" placeholder="e.g : 101" value="${studentToEdit?.rollNo || ''}">
+                    <input name="rollNo" class="rollno-input" type="number" placeholder="e.g : 12" value="${studentToEdit?.rollNo || ''}">
 
                     <p class="address-text">Address</p>
                     <input name="address" class="address-input" type="text" placeholder="House No., Street name, Area" value="${studentToEdit?.address || ''}">
@@ -230,6 +238,7 @@ function openStudentForm(studentToEdit = null) {
                 students[index] = {
                     ...students[index],
                     ...formValues,
+                    id: formValues.id ? Number(formValues.id) : students[index].id,
                     rollNo: formValues.rollNo ? Number(formValues.rollNo) : '',
                     photo: uploadedPhotoBase64
                 };
