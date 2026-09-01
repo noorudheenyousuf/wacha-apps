@@ -6,8 +6,7 @@ const classes = JSON.parse(localStorage.getItem('classes')) || [
 export function renderAddClassPage() {
     const classesNavbutton = document.querySelector('.js-classes-navbutton');
     if (classesNavbutton) {
-        classesNavbutton.addEventListener('click', () => {
-            
+        classesNavbutton.addEventListener('click', () => {            
             renderClassList();
         });
     }
@@ -19,8 +18,6 @@ function saveToClassStorage() {
 
 function renderClassList(searchQuery = '') {
     const query = searchQuery.toLowerCase().trim();
-
-    // 1. ഫിൽട്ടറിംഗ്: ക്ലാസിന്റെ പേര് അടിസ്ഥാനമാക്കി തിരയുന്നു
     const filteredClasses = classes.filter((cls) => {
         return cls.name.toLowerCase().includes(query);
     });
@@ -71,7 +68,7 @@ function renderClassList(searchQuery = '') {
     // 2. Search Input Event Listener & Focus Focus Handling
     const searchInput = document.querySelector('.js-search-input');
     if (searchInput) {
-        searchInput.focus();
+        
         searchInput.setSelectionRange(searchQuery.length, searchQuery.length);
 
         searchInput.addEventListener('input', (e) => {

@@ -76,7 +76,7 @@ function renderTeacherList(searchQuery = '') {
     // 2. Search Input Event Listener & Focus Focus Handling
     const searchInput = document.querySelector('.js-search-input');
     if (searchInput) {
-        searchInput.focus();
+        
         searchInput.setSelectionRange(searchQuery.length, searchQuery.length);
 
         searchInput.addEventListener('input', (e) => {

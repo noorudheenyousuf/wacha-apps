@@ -77,7 +77,7 @@ function renderSubjectList(searchQuery = '') {
     // Search Input Event Listener
     const searchInput = document.querySelector('.js-search-input');
     if (searchInput) {
-        searchInput.focus();
+        
         searchInput.setSelectionRange(searchQuery.length, searchQuery.length);
 
         searchInput.addEventListener('input', (e) => {
