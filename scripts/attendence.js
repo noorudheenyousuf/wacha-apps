@@ -142,6 +142,7 @@ export function renderAttendencePage() {
                             <p>${isPresent ? 'present' : 'absent'}</p>
                         </div>
                     </div>
+                    
                 `;
             });
 
@@ -169,6 +170,9 @@ export function renderAttendencePage() {
                 <div class="attendence-students-list-grid">
                     ${studentsCardsHTML}
                 </div>
+                <div class="save-button-div">
+            <button class="save-attendence-button">Save Attendence</button>
+        </div>
             `;
 
             // Click listener for individual student cards (Toggle Present/Absent)

@@ -264,3 +264,24 @@
 .js-attendence-student-list {
     
 }
+
+.save-attendence-button {
+    background-color: #2f5e8c;
+    color: white;
+    border: none;
+    padding: 20px;
+    margin-top: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 15px;
+    flex: 1;
+    font-size: 15px;
+    font-weight: bold;
+
+}
+
+.save-button-div {
+    display: flex;
+    justify-content: center;
+
+}
