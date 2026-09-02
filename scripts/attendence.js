@@ -2,45 +2,35 @@ export function renderAttendencePage() {
     const attendenceNavbutton = document.querySelector('.js-attendence-navbutton');
     
     attendenceNavbutton.addEventListener('click', () => {
-        // 1. Local Storage-ൽ നിന്ന് ഡാറ്റ എടുക്കുന്നു
         const classes = JSON.parse(localStorage.getItem('classes')) || [];
         const subjects = JSON.parse(localStorage.getItem('subjects')) || [];
         const students = JSON.parse(localStorage.getItem('students')) || [];
 
-
-       // 1. Class options ഉണ്ടാക്കുന്നു
-            let classOptionsHTML = '';
-
-            if (classes.length === 0) {
-                classOptionsHTML = '<option value="">No classes found</option>';
-            } else {
-                for (let i = 0; i < classes.length; i++) {
-                    let cls = classes[i];
-                    
-                    // ഒബ്ജക്റ്റ് ആണെങ്കിൽ അതിലെ പേര് എടുക്കുന്നു, അല്ലെങ്കിൽ നേരിട്ട് എടുക്കുന്നു
-                    let className = cls.name;
-                    
-                    classOptionsHTML += `<option value="${className}">${className}</option>`;
-                }
+        // Class options 
+        let classOptionsHTML = '';
+        if (classes.length === 0) {
+            classOptionsHTML = '<option value="">No classes found</option>';
+        } else {
+            for (let i = 0; i < classes.length; i++) {
+                let cls = classes[i];
+                let className = cls.name;
+                classOptionsHTML += `<option value="${className}">${className}</option>`;
             }
+        }
 
-            // 2. Subject options ഉണ്ടാക്കുന്നു
-            let subjectOptionsHTML = '';
-
-            if (subjects.length === 0) {
-                subjectOptionsHTML = '<option value="">No subjects found</option>';
-            } else {
-                for (let i = 0; i < subjects.length; i++) {
-                    let sub = subjects[i];
-                    
-                    // ഒബ്ജക്റ്റ് ആണെങ്കിൽ അതിലെ പേര് എടുക്കുന്നു, അല്ലെങ്കിൽ നേരിട്ട് എടുക്കുന്നു
-                    let subjectName = sub.name
-                    
-                    subjectOptionsHTML += `<option value="${subjectName}">${subjectName}</option>`;
-                }
+        // Subject options 
+        let subjectOptionsHTML = '';
+        if (subjects.length === 0) {
+            subjectOptionsHTML = '<option value="">No subjects found</option>';
+        } else {
+            for (let i = 0; i < subjects.length; i++) {
+                let sub = subjects[i];
+                let subjectName = sub.name;
+                subjectOptionsHTML += `<option value="${subjectName}">${subjectName}</option>`;
             }
+        }
 
-        // 3. Page HTML റൻഡർ ചെയ്യുന്നു
+        // Page HTML rendering
         const attendencePageHTML = `
             <div class="attendence-filter-container js-attendence-filter-container">
                 <div class="student-staff-buttons-div">
@@ -77,35 +67,36 @@ export function renderAttendencePage() {
                     </div>
                 </div>    
             </div>
-
-            <div class="attendence-students-list js-student-list">
-                <div class="attendence-students-list-demo">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check muted mx-auto mb-2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
-                    <p class="choose-text">Choose a class & subject</p>
-                    <p class="pick-text">Pick a class and subject above to load students</p>
+            <div class="js-attendence-student-list">
+                <div class="attendence-students-list js-student-list">
+                    <div class="attendence-students-list-demo">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check muted mx-auto mb-2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="m9 12 2 2 4-4"></path></svg>
+                        <p class="choose-text">Choose a class & subject</p>
+                        <p class="pick-text">Pick a class and subject above to load students</p>
+                    </div>
                 </div>
             </div>
         `;
 
         document.querySelector('main').innerHTML = attendencePageHTML;
-        
         setTodayDate();
-       
 
-        // 5. Filter & Render Function
+        // Elements
         const classSelect = document.querySelector('.js-class-dropdown');
         const subjectSelect = document.querySelector('.js-subject-dropdown');
-        const studentListContainer = document.querySelector('.js-student-list');
+        const studentListContainer = document.querySelector('.js-attendence-student-list');
+
+        // Attendance tracking map (Default: Everyone is Present)
+        let studentStatusMap = {};
 
         function filterAndRenderStudents() {
             const selectedClass = classSelect.value;
             const selectedSubject = subjectSelect.value;
 
-            // Class-ഉം Subject-ഉം സെലക്ട് ആയാൽ മാത്രം റൻഡർ ചെയ്യും
             if (selectedClass && selectedSubject) {
                 const filteredStudents = students.filter(std => {
-                    const studentClass = typeof std === 'object' ? (std.class || std.className) : null;
-                    return !studentClass || studentClass === selectedClass;
+                    const studentClass = typeof std === 'object' ? std.class : null;
+                    return studentClass === selectedClass;
                 });
 
                 if (filteredStudents.length === 0) {
@@ -113,21 +104,91 @@ export function renderAttendencePage() {
                     return;
                 }
 
-                let studentsHTML = '';
+                // Initializing default status as 'present' for filtered students
                 filteredStudents.forEach((student, index) => {
-                    const studentName = getName(student);
-
-                    studentsHTML += `
-                        <div class="student-item" style="display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #ccc;">
-                            <span>${index + 1}. ${studentName}</span>
-                            <div class="attendance-status">
-                                <label><input type="radio" name="attendance-${index}" value="present" checked> Present</label>
-                                <label><input type="radio" name="attendance-${index}" value="absent"> Absent</label>
-                            </div>
-                        </div>
-                    `;
+                    if (!studentStatusMap[index]) {
+                        studentStatusMap[index] = 'present';
+                    }
                 });
-                studentListContainer.innerHTML = studentsHTML;
+
+                renderList(filteredStudents);
+            }
+        }
+
+        function renderList(filteredStudents) {
+            let presentCount = 0;
+            let absentCount = 0;
+            let studentsCardsHTML = '';
+
+            filteredStudents.forEach((student, index) => {
+                const studentName = typeof student === 'object' 
+                    ? (student.name || student.studentName || 'Unknown') 
+                    : student;
+
+                const isPresent = studentStatusMap[index] === 'present';
+                if (isPresent) presentCount++;
+                else absentCount++;
+
+                // Dynamic single student card
+                studentsCardsHTML += `
+                    <div class="${isPresent ? 'students-list-attendence-div' : 'students-list-attendence-absent-div'} js-toggle-status" data-index="${index}">
+                        <img class="attendence-profile-picture" src="images/nooru.jpeg" alt="Profile">
+                        <p class="attendence-student-name">${studentName}</p>
+                        <div class="${isPresent ? 'present-status-div' : 'absent-status-div'}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide ${isPresent ? 'lucide-circle-check' : 'lucide-circle-x'}" aria-hidden="true">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                ${isPresent ? '<path d="m9 12 2 2 4-4"></path>' : '<path d="m15 9-6 6"></path><path d="m9 9 6 6"></path>'}
+                            </svg>
+                            <p>${isPresent ? 'present' : 'absent'}</p>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Overall Layout update
+            studentListContainer.innerHTML = `
+                <div class="present-absent-allabsent-div">
+                    <div class="present-div">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="m9 12 2 2 4-4"></path>
+                        </svg>
+                        ${presentCount} Present
+                    </div>
+                    <div class="absent-div">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-x" aria-hidden="true">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <path d="m15 9-6 6"></path>
+                            <path d="m9 9 9 6"></path>
+                        </svg>
+                        ${absentCount} Absent
+                    </div>
+                    <button class="js-all-absent-btn">All Absent</button>
+                </div>
+                
+                <div class="attendence-students-list-grid">
+                    ${studentsCardsHTML}
+                </div>
+            `;
+
+            // Click listener for individual student cards (Toggle Present/Absent)
+            document.querySelectorAll('.js-toggle-status').forEach(card => {
+                card.addEventListener('click', () => {
+                    const idx = card.dataset.index;
+                    studentStatusMap[idx] = studentStatusMap[idx] === 'present' ? 'absent' : 'present';
+                    renderList(filteredStudents);
+                });
+            });
+
+            // "All Absent" button functionality
+            const allAbsentBtn = document.querySelector('.js-all-absent-btn');
+            if (allAbsentBtn) {
+                allAbsentBtn.addEventListener('click', () => {
+                    filteredStudents.forEach((_, idx) => {
+                        studentStatusMap[idx] = 'absent';
+                    });
+                    renderList(filteredStudents);
+                });
             }
         }
 
@@ -136,13 +197,11 @@ export function renderAttendencePage() {
     });
 }
 
-// 7. തീയതി ഓട്ടോമാറ്റിക്കായി സെറ്റ് ചെയ്യുന്ന ഫങ്ഷൻ
 function setTodayDate() {
     const dateInput = document.querySelector('.js-date-input');
     if (dateInput) {
         const today = new Date();
         const year = today.getFullYear();
-        // മാസം 01, 02 എനാക്കാൻ (Format: YYYY-MM-DD)
         const month = String(today.getMonth() + 1).padStart(2, '0');
         const day = String(today.getDate()).padStart(2, '0');
         
