@@ -179,6 +179,61 @@ export function renderAttendencePage() {
         </div>
             `;
 
+
+           // Save Attendance Button Event Listener
+const saveBtn = document.querySelector('.save-attendence-button');
+if (saveBtn) {
+    saveBtn.addEventListener('click', () => {
+        const selectedDate = document.querySelector('.js-date-input').value;
+        const selectedClass = classSelect.value;
+        const selectedSubject = subjectSelect.value;
+
+        if (!selectedDate) {
+            alert('Please select a date!');
+            return;
+        }
+
+        // ഓരോ കുട്ടിയുടെയും അറ്റൻഡൻസ് സ്റ്റാറ്റസ്
+        const attendanceData = filteredStudents.map((student, index) => {
+            return {
+                studentId: student.id || index,
+                studentName: typeof student === 'object' ? (student.name || student.studentName) : student,
+                status: studentStatusMap[index] || 'present'
+            };
+        });
+
+        // നിലവിലുള്ള റെക്കോർഡുകൾ എടുക്കുന്നു
+        let savedAttendance = JSON.parse(localStorage.getItem('attendanceRecords')) || [];
+
+        // ഒരേ Date, Class, Subject ഉണ്ടോ എന്ന് പരിശോധിക്കുന്നു
+        const existingIndex = savedAttendance.findIndex(record => 
+            record.date === selectedDate && 
+            record.class === selectedClass && 
+            record.subject === selectedSubject
+        );
+
+        if (existingIndex !== -1) {
+            // 1. ഉണ്ടെങ്കിൽ പഴയ റെക്കോർഡ് അപ്‌ഡേറ്റ് ചെയ്യുന്നു
+            savedAttendance[existingIndex].records = attendanceData;
+            savedAttendance[existingIndex].updatedAt = new Date().toISOString();
+            alert('Attendance Updated Successfully!');
+        } else {
+            // 2. ഇല്ലെങ്കിൽ പുതിയ റെക്കോർഡ് പുഷ് ചെയ്യുന്നു
+            const newRecord = {
+                id: Date.now(),
+                date: selectedDate,
+                class: selectedClass,
+                subject: selectedSubject,
+                records: attendanceData
+            };
+            savedAttendance.push(newRecord);
+            alert('Attendance Saved Successfully!');
+        }
+console.log(savedAttendance)
+        // LocalStorage-ലേക്ക് തിരികെ സേവ് ചെയ്യുന്നു
+        localStorage.setItem('attendanceRecords', JSON.stringify(savedAttendance));
+    });
+}
             // Click listener for individual student cards (Toggle Present/Absent)
             document.querySelectorAll('.js-toggle-status').forEach(card => {
                 card.addEventListener('click', () => {
