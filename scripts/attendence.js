@@ -129,10 +129,14 @@ export function renderAttendencePage() {
                 if (isPresent) presentCount++;
                 else absentCount++;
 
+                const studentPhoto = (typeof student === 'object' && student.photo) 
+                    ? student.photo 
+                    : 'images/nooru.jpeg';
+
                 // Dynamic single student card
                 studentsCardsHTML += `
                     <div class="${isPresent ? 'students-list-attendence-div' : 'students-list-attendence-absent-div'} js-toggle-status" data-index="${index}">
-                        <img class="attendence-profile-picture" src="images/nooru.jpeg" alt="Profile">
+                        <img class="attendence-profile-picture" src="${studentPhoto}" alt="${studentName}">
                         <p class="attendence-student-name">${studentName}</p>
                         <div class="${isPresent ? 'present-status-div' : 'absent-status-div'}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide ${isPresent ? 'lucide-circle-check' : 'lucide-circle-x'}" aria-hidden="true">
