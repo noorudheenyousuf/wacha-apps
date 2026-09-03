@@ -1,3 +1,20 @@
+function updateHeaderName() {
+    const savedName = localStorage.getItem('userDisplayName');
+    // ഉദാഹരണത്തിന് ഹെഡറിലെ പേരിന്റെ ക്ലാസ് .js-header-user-name ആണെങ്കിൽ:
+    const headerNameEl = document.querySelector('.js-header-profile-name'); 
+    
+    if (headerNameEl && savedName) {
+        headerNameEl.textContent = savedName;
+    }
+}
+
+
+
+// പേജ് ലോഡ് ചെയ്യുമ്പോൾ തന്നെ ഹെഡറിലെ പേര് സെറ്റ് ചെയ്യുന്നു
+
+
+
+
 export function renderSettingsPage() {
     const settingsNavbutton = document.querySelector('.js-settings-navbutton');
     if (!settingsNavbutton) return;
@@ -80,6 +97,13 @@ export function renderSettingsPage() {
                 }
             });
         }
+
+        const saveButton = document.querySelector('.js-save-name-btn');
+            if(saveButton) {
+                saveButton.addEventListener('click', () => {
+                    updateHeaderName();
+                });
+            }
 
         // --- 2. Light / Dark Mode Toggle Event ---
         const lightBtn = document.querySelector('.js-light-mode-btn');
