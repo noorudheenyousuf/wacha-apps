@@ -45,7 +45,8 @@ body.dark-theme .report-student-detail-container,
 body.dark-theme .report-filter-container,
 body.dark-theme .students-list-attendence-div,
 body.dark-theme .students-list-attendence-absent-div,
-body.dark-theme button {
+body.dark-theme button,
+body.dark-theme .students-list-div {
     background-color: #1e1e1e !important;
     border: 1px solid #4d4949;
     color: #ffffff !important;
